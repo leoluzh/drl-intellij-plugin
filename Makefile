@@ -6,7 +6,7 @@ SHELL := /bin/bash
 # Uses the Gradle wrapper once it exists (see `make wrapper`); falls back to
 # a system-installed `gradle` until then.
 GRADLE          := $(if $(wildcard ./gradlew),./gradlew,gradle)
-GRADLE_VERSION  ?= 8.14.3
+GRADLE_VERSION  ?= 9.7.1
 
 DROOLS_LSP_DIR  ?= drools-lsp
 DROOLS_LSP_REPO ?= https://github.com/kiegroup/drools-lsp.git

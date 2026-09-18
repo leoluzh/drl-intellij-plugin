@@ -23,7 +23,7 @@ needs a system Gradle install:
 - `make setup` — first-time: generate wrapper + build the `drools-lsp`
   server jar (needed for the LSP feature to do anything at runtime)
 - `make devbox-build` / `devbox-test` / `devbox-run` — same, but inside
-  `devbox shell` (JDK 21 + Gradle 8.14.3 provisioned automatically — use
+  `devbox shell` (JDK 21 + Gradle 9.7.1 provisioned automatically — use
   this if the host doesn't have a working JDK 21)
 
 Direct Gradle equivalents: `./gradlew compileKotlin`, `./gradlew build`,
@@ -43,8 +43,8 @@ Direct Gradle equivalents: `./gradlew compileKotlin`, `./gradlew build`,
   plugin, which lets Gradle auto-download the right JDK — if this error
   still appears, check network access to the Foojay Disco API.
 - **`IntelliJ Platform Gradle Plugin requires Gradle 9.0.0 and higher`**:
-  this repo pins Gradle 8.14.3 (see `gradle/wrapper/gradle-wrapper.properties`
-  and `devbox.json`'s `gradle@8.14.3`). The IntelliJ Platform Gradle Plugin
+  this repo pins Gradle 9.7.1 (see `gradle/wrapper/gradle-wrapper.properties`
+  and `devbox.json`'s `gradle@9.7.1`). The IntelliJ Platform Gradle Plugin
   version in `build.gradle.kts` must stay **2.11.0 or lower** (2.12.0 bumped
   its minimum Gradle requirement to 9.0.0) unless Gradle itself is upgraded
   too — don't bump one without the other.

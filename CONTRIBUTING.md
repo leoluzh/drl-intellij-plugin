@@ -11,7 +11,7 @@ it.
 - Maven (only if you need to build `drools-lsp` locally)
 
 Don't want to install JDK 21 yourself? Use [Devbox](https://www.jetify.com/devbox)
-(`devbox shell`) — see `devbox.json`, it provisions JDK 21 + Gradle 8.14.3 for
+(`devbox shell`) — see `devbox.json`, it provisions JDK 21 + Gradle 9.7.1 for
 you.
 
 ## First-time setup
