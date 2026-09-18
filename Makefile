@@ -4,8 +4,11 @@
 SHELL := /bin/bash
 
 # Uses the Gradle wrapper once it exists (see `make wrapper`); falls back to
-# a system-installed `gradle` until then.
-GRADLE          := $(if $(wildcard ./gradlew),./gradlew,gradle)
+# a system-installed `gradle` until then. Invoked as `bash gradlew` rather
+# than `./gradlew`: GNU Make for Windows bypasses SHELL and execs simple
+# recipe lines directly, and Windows can't run `./gradlew` (no shell to
+# interpret it) that way — `bash gradlew` works there and everywhere else.
+GRADLE          := $(if $(wildcard ./gradlew),bash gradlew,gradle)
 GRADLE_VERSION  ?= 9.7.1
 
 DROOLS_LSP_DIR  ?= drools-lsp

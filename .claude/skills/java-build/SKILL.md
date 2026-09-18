@@ -23,12 +23,13 @@ needs a system Gradle install:
 - `make setup` — first-time: generate wrapper + build the `drools-lsp`
   server jar (needed for the LSP feature to do anything at runtime)
 - `make devbox-build` / `devbox-test` / `devbox-run` — same, but inside
-  `devbox shell` (JDK 21 + Gradle 9.7.1 provisioned automatically — use
+  `devbox shell` (JDK 21 + Gradle 9.5.1 provisioned automatically — use
   this if the host doesn't have a working JDK 21)
 
 Direct Gradle equivalents: `./gradlew compileKotlin`, `./gradlew build`,
 `./gradlew test`, `./gradlew runIde`, `./gradlew verifyPlugin`,
-`./gradlew buildPlugin`.
+`./gradlew buildPlugin` (on Windows, run these as `bash gradlew ...`
+instead — see the Makefile pitfall below).
 
 ## Known pitfalls (already hit and fixed once — don't re-diagnose)
 
@@ -43,11 +44,20 @@ Direct Gradle equivalents: `./gradlew compileKotlin`, `./gradlew build`,
   plugin, which lets Gradle auto-download the right JDK — if this error
   still appears, check network access to the Foojay Disco API.
 - **`IntelliJ Platform Gradle Plugin requires Gradle 9.0.0 and higher`**:
-  this repo pins Gradle 9.7.1 (see `gradle/wrapper/gradle-wrapper.properties`
-  and `devbox.json`'s `gradle@9.7.1`). The IntelliJ Platform Gradle Plugin
-  version in `build.gradle.kts` must stay **2.11.0 or lower** (2.12.0 bumped
-  its minimum Gradle requirement to 9.0.0) unless Gradle itself is upgraded
-  too — don't bump one without the other.
+  this repo pins Gradle 9.7.1 (see `gradle/wrapper/gradle-wrapper.properties`;
+  `devbox.json` provisions the closest resolvable nixpkgs package,
+  `gradle_9@9.5.1` — `gradle@9.7.1` doesn't exist there, plain `gradle` tops
+  out at 8.x). The IntelliJ Platform Gradle Plugin version in
+  `build.gradle.kts` must stay **2.11.0 or lower** (2.12.0 bumped its
+  minimum Gradle requirement to 9.0.0) unless Gradle itself is upgraded too
+  — don't bump one without the other.
+- **`make build`/`make compile`/etc. fail with `'.' is not recognized as an
+  internal or external command`** (Windows only): native `make.exe`
+  (e.g. from Chocolatey) bypasses `SHELL` and `CreateProcess`s simple
+  recipe lines directly, and Windows can't run `./gradlew` that way (no
+  shell to interpret `./`). Fixed by having the Makefile's `GRADLE`
+  variable invoke `bash gradlew` instead of `./gradlew` — don't revert
+  that back to `./gradlew`.
 - **`sourceCompatibility='17' but IntelliJ Platform '2024.2' requires
   sourceCompatibility='21'`**: `build.gradle.kts` sets
   `sourceCompatibility`/`targetCompatibility`/`jvmTarget`/`jvmToolchain` to
