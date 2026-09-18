@@ -73,7 +73,7 @@ If you'd rather use the wrapper (recommended for reproducible builds /
 CI), generate it once and then use `./gradlew`:
 
 ```bash
-gradle wrapper --gradle-version 8.14.3
+gradle wrapper --gradle-version 9.7.1
 ./gradlew runIde
 ```
 

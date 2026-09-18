@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/main/.schema/devbox.schema.json",
   "packages": [
     "jdk21@latest",
-    "gradle@8.14.3"
+    "gradle_9@9.5.1"
   ],
   "env": {
     "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
