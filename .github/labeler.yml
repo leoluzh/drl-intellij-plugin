@@ -1,0 +1,43 @@
+kotlin:
+  - changed-files:
+      - any-glob-to-any-file: "src/main/kotlin/**"
+
+resources:
+  - changed-files:
+      - any-glob-to-any-file: "src/main/resources/**"
+
+build:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "build.gradle.kts"
+          - "settings.gradle.kts"
+          - "gradle.properties"
+          - "gradle/**"
+          - "gradlew"
+          - "gradlew.bat"
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: ".github/**"
+
+devbox:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "devbox.json"
+          - "devbox.lock"
+
+samples:
+  - changed-files:
+      - any-glob-to-any-file: "samples/**"
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "**/*.md"
+          - "README.md"
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file:
+          - "build.gradle.kts"
+          - "gradle/libs.versions.toml"

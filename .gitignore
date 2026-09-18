@@ -1,0 +1,17 @@
+.gradle/
+.intellijPlatform/
+build/
+out/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+
+# devbox local state (see devbox.json)
+.devbox/
+
+# cloned by `make drools-lsp` (see Makefile)
+/drools-lsp/
+
+# personal Claude Code overrides — .claude/settings.json is shared/committed
+.claude/settings.local.json

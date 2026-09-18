@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/main/.schema/devbox.schema.json",
+  "packages": [
+    "jdk21@latest",
+    "gradle@8.14.3"
+  ],
+  "env": {
+    "GRADLE_OPTS": "-Dorg.gradle.daemon=false"
+  },
+  "shell": {
+    "init_hook": [
+      "echo 'devbox: JDK 21 ready ('$(java -version 2>&1 | head -n1)')'"
+    ],
+    "scripts": {
+      "build": "./gradlew build",
+      "compile": "./gradlew compileJava compileKotlin",
+      "test": "./gradlew test",
+      "run-ide": "./gradlew runIde"
+    }
+  }
+}

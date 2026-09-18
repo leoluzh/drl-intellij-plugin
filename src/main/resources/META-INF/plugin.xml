@@ -1,0 +1,60 @@
+<idea-plugin>
+    <id>dev.leoluzh.drlsupport</id>
+    <name>DRL Support</name>
+    <vendor url="https://github.com/leoluzh">Leonardo Fernandes</vendor>
+
+    <description><![CDATA[
+    Editing support for Drools rule files (<code>.drl</code>): syntax highlighting,
+    line/block commenting and brace/parenthesis matching, on their own — plus, when the
+    optional <a href="https://plugins.jetbrains.com/plugin/23257-lsp4ij">LSP4IJ</a> plugin
+    is installed, completion, diagnostics, hover, navigation and rename powered by the real
+    <a href="https://github.com/kiegroup/drools-lsp">Drools Language Server</a>.
+    ]]></description>
+
+    <!-- Works standalone in any IntelliJ-based IDE: file type, syntax highlighting,
+         commenting and brace matching for .drl files need nothing else. -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Optional: when LSP4IJ (https://plugins.jetbrains.com/plugin/23257-lsp4ij) is
+         installed, drl-lsp4ij.xml wires up the real Drools Language Server
+         (completion, diagnostics, hover, navigation, rename...). Without it,
+         this plugin still works, just without those smarter features. -->
+    <depends optional="true" config-file="drl-lsp4ij.xml">com.redhat.devtools.lsp4ij</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <fileType
+            name="DRL File"
+            implementationClass="dev.leoluzh.drlsupport.DrlFileType"
+            fieldName="INSTANCE"
+            language="DRL"
+            extensions="drl"/>
+
+        <lang.parserDefinition
+            language="DRL"
+            implementationClass="dev.leoluzh.drlsupport.psi.DrlParserDefinition"/>
+
+        <lang.syntaxHighlighterFactory
+            language="DRL"
+            implementationClass="dev.leoluzh.drlsupport.highlighting.DrlSyntaxHighlighterFactory"/>
+
+        <colorSettingsPage
+            implementationClass="dev.leoluzh.drlsupport.highlighting.DrlColorSettingsPage"/>
+
+        <lang.commenter
+            language="DRL"
+            implementationClass="dev.leoluzh.drlsupport.editor.DrlCommenter"/>
+
+        <lang.braceMatcher
+            language="DRL"
+            implementationClass="dev.leoluzh.drlsupport.editor.DrlBraceMatcher"/>
+
+        <projectService
+            serviceImplementation="dev.leoluzh.drlsupport.settings.DrlLspSettingsState"/>
+
+        <projectConfigurable
+            parentId="tools"
+            instance="dev.leoluzh.drlsupport.settings.DrlLspConfigurable"
+            id="dev.leoluzh.drlsupport.settings.DrlLspConfigurable"
+            displayName="Drools LSP"/>
+    </extensions>
+</idea-plugin>

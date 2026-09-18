@@ -1,0 +1,27 @@
+<idea-plugin>
+    <!--
+      Loaded only when the LSP4IJ plugin (com.redhat.devtools.lsp4ij) is
+      installed — see the optional <depends> in plugin.xml. Without LSP4IJ,
+      DRL files still get syntax highlighting, commenting and brace
+      matching from the base plugin; with it, they also get completion,
+      diagnostics, hover, go-to-definition, find references, rename and
+      outline from the real Drools Language Server.
+    -->
+    <extensions defaultExtensionNs="com.redhat.devtools.lsp4ij">
+        <server id="droolsLanguageServer"
+                name="Drools Language Server"
+                factoryClass="dev.leoluzh.drlsupport.lsp.DrlLanguageServerFactory">
+            <description><![CDATA[
+            <p>Language Server for DRL (Drools Rule Language) files, based on
+            <a href="https://github.com/kiegroup/drools-lsp">kiegroup/drools-lsp</a> (Apache-2.0).</p>
+            <p>Requires Java 17+ and the <code>drools-lsp-server-jar-with-dependencies.jar</code>,
+            configured under Settings/Preferences &rarr; Tools &rarr; Drools LSP.</p>
+            ]]></description>
+        </server>
+
+        <fileNamePatternMapping
+            patterns="*.drl"
+            serverId="droolsLanguageServer"
+            languageId="drools"/>
+    </extensions>
+</idea-plugin>

@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a problem with the DRL Support plugin
+labels: [bug, needs-triage]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal .drl snippet if relevant.
+      placeholder: |
+        1. Open a .drl file with '...'
+        2. Trigger '...'
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: false
+
+  - type: input
+    id: plugin-version
+    attributes:
+      label: Plugin version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: ide-version
+    attributes:
+      label: IntelliJ IDEA version
+      placeholder: "2024.2.x"
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log output
+      description: Paste from Help -> Show Log in Explorer/Finder, if applicable.
+      render: shell
+    validations:
+      required: false

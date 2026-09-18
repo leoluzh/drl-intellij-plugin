@@ -1,0 +1,34 @@
+package br.gov.mg.sef.sicop.rules;
+
+import br.gov.mg.sef.sicop.model.Contrato;
+import br.gov.mg.sef.sicop.model.Notificacao;
+
+/*
+ * Regras de exemplo para testar o plugin: abra este arquivo e confira o
+ * syntax highlighting; com o Drools Language Server configurado (Settings
+ * -> Tools -> Drools LSP), teste também completion (Ctrl+Space dentro do
+ * "when"), hover sobre "Contrato", e Find Usages / Rename em "$c".
+ */
+
+global java.util.List notificacoes;
+
+rule "Contrato vencido"
+    no-loop true
+    salience 10
+    agenda-group "cobranca"
+when
+    $c : Contrato(dataVencimento < today, status == "ATIVO")
+then
+    $c.setStatus("VENCIDO");
+    update($c);
+    notificacoes.add(new Notificacao($c.getId(), "Contrato vencido"));
+end
+
+rule "Contrato próximo do vencimento"
+    salience 5
+when
+    $c : Contrato(diasParaVencer <= 30, diasParaVencer > 0, status == "ATIVO")
+    not Notificacao(contratoId == $c.getId())
+then
+    notificacoes.add(new Notificacao($c.getId(), "Vence em " + $c.getDiasParaVencer() + " dias"));
+end
